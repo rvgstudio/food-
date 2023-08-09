@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="w-100" src="{% static 'img/carousel-1.jpg' %}" alt="Image">
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-lg-7">
+                                <h1 class="display-2 mb-5 animated slideInDown"></h1>
+                                
+                                <span class="d-inline p-2">   <a href="{% url 'register' %}" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Register</a>  
+                                 <a href="{% url 'loginpage' %}" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Login</a></span>
+                                
+                                {% comment %} <a href="" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a> {% endcomment %}
+                                <span class="d-block p-5 "><a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Login With Google</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<!-- Carousel End -->
+{% endblock content %}
+

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Product Start -->
+    
+    <!-- Product Start -->
+    <div class="container-xxl py-5 my-6">
+        <div class="container">
+            <div class="row g-0 gx-5 align-items-end">
+                <div class="col-lg-6">
+                    <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                        <h1 class="display-5 mb-3">Our Products</h1>
+                        <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                        <li class="nav-item me-2">
+                            <a class="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">Vegetable</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Fruits </a>
+                        </li>
+                        <li class="nav-item me-0">
+                            <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Fresh</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content d-flex">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                   
+                    <div class="row g-4">
+                        {% for i in page_obj %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="product-item">
+                                <div class="position-relative bg-light overflow-hidden">
+                                    <a href="/single_product/{{i.id}}" class="image"><img class="img-fluid w-100" style="height: 270px; width:20px;" src="{{i.Product_Image.url}}" alt=""></a>
+                                </div>
+                                <div class="text-center p-4">
+                                    <a class="d-block h5 mb-2" href="/single_product/{{i.id}}">{{i.Product_Name}}</a>
+                                    <span class="text-primary me-1">{{i.Product_Price}}</span>
+                                    <span class="text-body text-decoration-line-through">$29.00</span>
+                                </div>
+                                <div class="d-flex border-top">
+                                    <small class="w-50 text-center border-end py-2">
+                                        <a class="text-body" href="/single_product/{{i.id}}"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                    </small>
+                                    <small class="w-50 text-center py-2">
+                                        <a href="{% url 'cart_add' i.id %}" class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product End -->
+    <!-- Product End -->
+
+<div class="d-flex justify-content-center">
+<ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item"> <a class="page-link" href="?page=1">&laquo;  first </a> </li>
+            <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number}}"> &laquo;</a> </li>
+        {% endif %}
+
+        <li class="page-item"><a class="page-link"> {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a></li>
+        
+        {% if page_obj.has_next %}
+           <li class="page-item">  <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a> </li>
+            <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> </li>
+        {% endif %}
+   
+</ul>
+</div>
+{% comment %} <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav> {% endcomment %}
+    {% endblock content %}
+

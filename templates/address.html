@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $(".cancel").click(function(){
+        $("#panel,.editmodel").slideUp();
+      });
+      $(".Add").click(function(){
+        $("#panel").slideDown();
+      });
+    });
+    </script>
+
+<style> 
+#panel, #flip {
+  padding: 5px;
+  text-align: center;
+  /* background-color: #e5eecc; */
+  /* border: solid 1px #c3c3c3; */
+}
+
+#panel {
+  padding: 50px;
+  display: none;
+}
+.editmodel {
+    padding: 50px;
+    display: none;
+  }
+.fa-plus {
+        margin-right: 1em;
+    }
+    .menu-nav {
+       
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .menu-item {
+        color: ;
+        padding: 3px;
+      }
+      
+      .three-dots:after {
+        cursor: pointer;
+        color: #444;
+        content: '\2807';
+        font-size: 20px;
+        padding: 0 5px;
+      }
+      
+      {% comment %} a {
+        text-decoration: none;
+        color: white;
+      }
+      
+      a div {
+        padding: 2px;
+      }
+       {% endcomment %}
+      .threedropdown {
+        position: absolute;
+        right: 10px;
+        padding : 5px 10px 0px 10px;
+        background-color: #fff;
+        
+        box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.3);
+        margin-right: 22px;
+        margin-bottom:10px ;
+        outline: none;
+        opacity: 3;
+        z-index: -1;
+        transition: opacity 0.1s, z-index 0.1s, max-height: 5s;
+      }
+      
+      .dropdown-container:focus {
+        outline: none;
+      }
+      
+      .dropdown-container:focus .threedropdown {
+        opacity: 1;
+        z-index: 100;
+        max-height: 100vh;
+        transition: opacity 0.2s, z-index 0.2s, max-height: 0.2s;
+      }
+
+  
+</style>
+
+<br><br><br><br><br>
+<div class="container-xl px-4 mt-4 ">
+    <!-- Account page navigation-->
+    <div class="row ">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header"> <img class="img-account-profile mb-2" src="{{user.profile.profile_pic.url}}"
+                        style="height: 50px; width: 50px;  border-radius:250px;" alt=""> <b class="p-4">
+                        {{user.username}} </b></div>
+                <div class="card-body text-center">
+                    <div class="list-group">
+                        <a href="{% url 'profile' %}" class="list-group-item list-group-item-action">Account Details</a>
+                        <a href="{% url 'address' %}" class="list-group-item list-group-item-action">Address</a>
+                        <a href="#" class="list-group-item list-group-item-action">Phone Number</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between pt-3">
+                    <p class=''>Address Details </p>
+                    <a class="Add" id="flip"><i class="fa-solid fa-plus"> </i>Add Address</a>
+                </div>
+                
+            </div>
+            <div id="panel">
+                <div class="container">
+                <form class="row g-3" method="POST" action="{% url 'address' %}">
+                    {% csrf_token %}
+                    <select id="inputState" name="addresstype" class="form-select">
+                        <option selected>Home</option>
+                        <option>Work</option>
+                      </select>
+                  <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label"></label>
+                    <input type="text" class="form-control" id="inputEmail4" name="name" placeholder="Name">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label"></label>
+                    <input type="number" class="form-control" id="inputPassword4" name="phone" placeholder="10 Degit No ">
+                  </div>
+                  <div class="col-12">
+                    <label for="inputAddress" class="form-label"></label>
+                    <input type="text" class="form-control" id="inputAddress" name="house" placeholder="House No , Apartment Name">
+                  </div>
+                  <div class="col-12">
+                    <label for="inputAddress2" class="form-label"></label>
+                    <textarea placeholder=" Address (Society, Street ) " type="text" name="society" class="form-control" id="inputAddress2" rows="4" cols="50"></textarea>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputCity" class="form-label">City</label>
+                    <input type="text" class="form-control" name="city" id="inputCity">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="inputState" class="form-label">State</label>
+                    <select id="inputState" name="state" class="form-select">
+                      <option>Gujrat</option>
+                      <option>Rajsthan</option>
+                      <option>Maharastra</option>
+                      <option>Mp</option>
+                      <option>Hariyana</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="inputZip" class="form-label">Zip</label>
+                    <input type="text" name="zip" class="form-control" id="inputZip">
+                  </div>
+                  <div class="col-md-6 pt-3">
+                    <button type="submit" class="btn btn-primary btn-lg" >Submit</button>
+                    <a type="" class="cancel" style="margin-left: 35px;">Cancel</a>
+                  </div>
+                  <!-- <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div> -->
+                </form>
+                </div>
+            </div>
+            
+
+            {% comment %} card {% endcomment %}
+            {% for i in show %}
+            <div class="card mb-3">
+                <div class="card-header">
+                  
+                  <div class="menu-nav">
+                    <div class="menu-item">
+                        {{i.Address_type}}
+                    </div>
+                     <div class="dropdown-container" tabindex="-1">
+                       <div class="three-dots"></div>
+                       <div class="threedropdown">
+                         <a style="color:black;" class="edit"><p><i class="bi bi-pen">  </i>Edit</p></a>
+                         <a href="#" style="color:black;"><p><i class="bi bi-trash">  </i>Delete</p></a>
+                       </div>
+                     </div>
+                   </div>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">{{i.Name}} - {{i.Phone}}</h6>
+                  
+                  <p class="card-text">{{i.Apartment}}, {{i.Society}}, {{i.City}}, {{i.State}} <b> - {{i.Zip}}</b> </p>
+                </div>
+              </div>
+              {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    
+</script>
+
+{% endblock content %}
