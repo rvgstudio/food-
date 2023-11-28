@@ -131,7 +131,7 @@ def cart_clear(request):
     return redirect("cart_detail")
 
 
-@login_required
+@login_required # Hello This Change Apply is Ravi
 
 
 
